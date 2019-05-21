@@ -1,0 +1,10 @@
+.idea
+target/
+lib/
+result.xml
+result.db
+*.iml
+fr.upem.foraxproof.main/fr.upem.foraxproof.main.iml
+fr.upem.foraxproof.core/fr.upem.foraxproof.core.iml
+fr.upem.foraxproof.rest/fr.upem.foraxproof.rest.iml
+fr.upem.foraxproof.impl/fr.upem.foraxproof.impl.iml

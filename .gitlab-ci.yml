@@ -1,0 +1,6 @@
+image: maven:3.5.0-jdk-9-slim
+
+maven-test:
+  stage: test
+  script:
+      - mvn test

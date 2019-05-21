@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parsing results</title>
+        <meta charset="UTF-8">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="vue.min.js"></script>
+    </head>
+    <body>
+        <nav>
+            <a class="navbar-title" href="#">Foraxproof</a>
+            <div class="right">[Alex PLIEZ & Vincent RASQUIER]</div>
+        </nav>
+        <div class="container">
+            <div id="app">
+                <h1>List of records</h1>
+                <form v-on:submit.prevent="getRecords">
+                    <div class="form-group">
+                        <label for="context">Context</label>
+                        <input type="text" placeholder="Context" v-model="context" id="context" />
+                    </div>
+                    <div class="form-group">
+                        <label for="rule">Rule</label>
+                        <input type="text" placeholder="Rule" v-model="rule" id="rule" />
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Level</label>
+                        <select v-model="level" id="level">
+                            <option value="">ALL</option>
+                            <option>ERROR</option>
+                            <option>WARNING</option>
+                            <option>INFO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="limit">Limit</label>
+                        <input type="number" min="0" placeholder="Limit" v-model="limit" id="limit" />
+                    </div>
+                    <div class="form-group">
+                        <button>Submit</button>
+                    </div>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th v-on:click="sortBy('context')">Context<i class="arrow up"></i><i class="arrow down"></i></th>
+                            <th v-on:click="sortBy('rule')">Rule<i class="arrow up"></i><i class="arrow down"></i></th>
+                            <th v-on:click="sortBy('level')">Level<i class="arrow up"></i><i class="arrow down"></i></th>
+                            <th v-on:click="sortBy('message')">Message<i class="arrow up"></i><i class="arrow down"></i></th>
+                        </tr>
+                        <tr>
+                            <th class="filter-container"><input type="text" placeholder="Search" v-model="contextFilter" class="filter"/></th>
+                            <th class="filter-container"><input type="text" placeholder="Search" v-model="ruleFilter" class="filter"/></th>
+                            <th class="filter-container"><input type="text" placeholder="Search" v-model="levelFilter" class="filter"/></th>
+                            <th class="filter-container"><input type="text" placeholder="Search" v-model="messageFilter" class="filter"/></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="record in records" v-if="filter(record.context, record.rule, record.level, record.message)">
+                            <td>{{ record.context }}</td>
+                            <td>{{ record.rule }}</td>
+                            <td v-bind:class="lowerCase(record.level)">{{ record.level }}</td>
+                            <td>{{ record.message }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>
